@@ -1,13 +1,473 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>کارت عروسی</title>
+    <title>Moslem & Sepide Wedding Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Vazirmatn', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .invitation-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform: scale(1.3);
+            transition: all 0.5s ease;
+        }
+
+        .text-overlay {
+            position: absolute;
+            bottom: 20%;
+            width: 90%;
+            color: white;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .names {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .date {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .location {
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .map-link {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .map-link:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .timer {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .animate-fade {
+            animation: fadeInUp 1s forwards;
+        }
+
+        .animate-fade-delay-1 {
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        .animate-fade-delay-2 {
+            animation: fadeInUp 1s forwards 1s;
+        }
+
+        .animate-fade-delay-3 {
+            animation: fadeInUp 1s forwards 1.5s;
+        }
+
+        .animate-fade-delay-4 {
+            animation: fadeInUp 1s forwards 2s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Flower petals animation */
+        .petal {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Elegant particle effects */
+        .elegant-particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Overlay with glowing effect */
+        .glow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 2s ease;
+            pointer-events: none;
+        }
+
+        /* 3D transform for the image */
+        .transform-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+    </style>
 </head>
-<body style="text-align: center;">
-    <a href="https://maps.app.goo.gl/tsrXDiFR3zjww7w88" target="_blank">
-        <img src="wedded.jpg" alt="کارت عروسی ما" width="500">
-    </a>
+<body>
+<div class="container">
+    <div class="transform-container" id="transformContainer">
+        <!-- استفاده از تصویر واقعی که شما ارسال کردید -->
+        <img id="weddingImage" class="invitation-img" src="./us.JPG" alt="Moslem & Sepide Wedding">
+    </div>
+
+    <div class="glow-overlay" id="glowOverlay"></div>
+
+    <div id="textOverlay" class="text-overlay">
+        <div id="names" class="names">Moslem & Sepide</div>
+        <div id="date" class="date">15 فروردین 1404</div>
+        <div id="location" class="location">همدان، تالار روشان، ساعت 18</div>
+        <a id="mapLink" class="map-link" href="https://maps.app.goo.gl/tsrXDiFR3zjww7w88" target="_blank">
+            مشاهده نقشه
+        </a>
+        <div id="timer" class="timer"></div>
+    </div>
+
+    <audio id="bgMusic" loop autoplay>
+        <source src="./1.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+    // بارگیری و شروع صدا به صورت خودکار
+    function initializeAudioAutoplay() {
+        const audio = document.getElementById('bgMusic');
+
+        // روش‌های مختلف برای پخش خودکار صدا
+        function attemptPlay() {
+            audio.play().then(() => {
+                console.log("Audio playing automatically");
+            }).catch(e => {
+                console.log("Auto-play prevented", e);
+
+                // اگر پخش خودکار مسدود شد، یک بار دیگر تلاش می‌کنیم
+                document.addEventListener('click', function() {
+                    audio.play();
+                }, {once: true});
+            });
+        }
+
+        // مقداردهی اولیه و تلاش برای پخش
+        audio.volume = 0.7;
+        attemptPlay();
+
+        // بررسی وضعیت پخش
+        audio.addEventListener('ended', function() {
+            audio.currentTime = 0;
+            audio.play();
+        });
+
+        // تلاش مجدد با تعامل کاربر (برای iOS)
+        window.addEventListener('touchstart', function() {
+            attemptPlay();
+        }, {once: true});
+    }
+
+    // انیمیشن ظاهر شدن تصویر با anime.js
+    function animateImage() {
+        const image = document.getElementById('weddingImage');
+        const transformContainer = document.getElementById('transformContainer');
+        const glowOverlay = document.getElementById('glowOverlay');
+
+        // نمایش تصویر با افکت ویژه
+        anime({
+            targets: image,
+            opacity: [0, 1],
+            scale: [1.3, 1],
+            duration: 2000,
+            easing: 'easeOutQuad'
+        });
+
+        // افکت 3D برای ظرف تصویر
+        anime({
+            targets: transformContainer,
+            rotateX: [5, 0],
+            rotateY: [5, 0],
+            duration: 2000,
+            easing: 'easeOutQuad'
+        });
+
+        // افکت درخشش
+        setTimeout(() => {
+            glowOverlay.style.opacity = '1';
+            setTimeout(() => {
+                glowOverlay.style.opacity = '0';
+            }, 1500);
+        }, 500);
+    }
+
+    // ایجاد ذرات گلبرگ و افکت‌های ویژه
+    function createElegantEffects() {
+        const container = document.querySelector('.container');
+        const petalColors = ['#f8dde3', '#ffffff', '#ffe6f0'];
+
+        // ایجاد گلبرگ‌های متحرک
+        function createPetals() {
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.width = `${10 + Math.random() * 20}px`;
+                petal.style.height = `${10 + Math.random() * 20}px`;
+                petal.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="${petalColors[Math.floor(Math.random() * petalColors.length)]}" d="M12,1C8.1,1,5,4.1,5,8c0,4,7,15,7,15s7-11,7-15C19,4.1,15.9,1,12,1z"/></svg>')`;
+
+                // اضافه کردن به DOM
+                container.appendChild(petal);
+
+                // انیمیشن با anime.js
+                anime({
+                    targets: petal,
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    opacity: [0, 0.8, 0],
+                    rotate: anime.random(-360, 360),
+                    scale: [0, 1, 0],
+                    duration: anime.random(3000, 8000),
+                    delay: anime.random(0, 5000),
+                    easing: 'easeOutQuad',
+                    complete: function(anim) {
+                        petal.remove();
+                        if (document.querySelector('.container')) {
+                            createPetal();
+                        }
+                    }
+                });
+            }
+        }
+
+        // ایجاد یک گلبرگ جدید به صورت مداوم
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.width = `${10 + Math.random() * 20}px`;
+            petal.style.height = `${10 + Math.random() * 20}px`;
+            petal.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="${petalColors[Math.floor(Math.random() * petalColors.length)]}" d="M12,1C8.1,1,5,4.1,5,8c0,4,7,15,7,15s7-11,7-15C19,4.1,15.9,1,12,1z"/></svg>')`;
+
+            container.appendChild(petal);
+
+            anime({
+                targets: petal,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                opacity: [0, 0.8, 0],
+                rotate: anime.random(-360, 360),
+                scale: [0, 1, 0],
+                duration: anime.random(3000, 8000),
+                easing: 'easeOutQuad',
+                complete: function(anim) {
+                    petal.remove();
+                    if (document.querySelector('.container')) {
+                        createPetal();
+                    }
+                }
+            });
+        }
+
+        // ایجاد افکت ذرات درخشان
+        function createElegantParticles() {
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'elegant-particle';
+
+                container.appendChild(particle);
+
+                anime({
+                    targets: particle,
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    opacity: [0, 0.8, 0],
+                    scale: [0, anime.random(1, 3), 0],
+                    duration: anime.random(2000, 6000),
+                    delay: anime.random(0, 3000),
+                    easing: 'easeOutQuad',
+                    complete: function(anim) {
+                        particle.remove();
+                        if (document.querySelector('.container')) {
+                            createParticle();
+                        }
+                    }
+                });
+            }
+        }
+
+        // ایجاد یک ذره جدید به صورت مداوم
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'elegant-particle';
+
+            container.appendChild(particle);
+
+            anime({
+                targets: particle,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                opacity: [0, 0.8, 0],
+                scale: [0, anime.random(1, 3), 0],
+                duration: anime.random(2000, 6000),
+                easing: 'easeOutQuad',
+                complete: function(anim) {
+                    particle.remove();
+                    if (document.querySelector('.container')) {
+                        createParticle();
+                    }
+                }
+            });
+        }
+
+        // شروع افکت‌ها
+        createPetals();
+        createElegantParticles();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const image = document.getElementById('weddingImage');
+        const names = document.getElementById('names');
+        const date = document.getElementById('date');
+        const location = document.getElementById('location');
+        const mapLink = document.getElementById('mapLink');
+        const timer = document.getElementById('timer');
+
+        // راه‌اندازی پخش خودکار صدا
+        initializeAudioAutoplay();
+
+        // انیمیشن تصویر
+        animateImage();
+
+        // تنظیم تایمر شمارش معکوس
+        const weddingDate = new Date("2025-04-04T18:00:00");
+        $('#timer').countdown(weddingDate, function(event) {
+            $(this).html(event.strftime('تا روز عروسی: %D روز، %H ساعت، %M دقیقه، %S ثانیه'));
+        });
+
+        // شروع روند نمایش عناصر متنی
+        setTimeout(() => {
+            // بلر کردن تصویر
+            image.style.filter = 'blur(3px) brightness(0.8)';
+
+            // نمایش متن‌ها با انیمیشن‌های متفاوت
+            setTimeout(() => {
+                names.classList.add('animate-fade');
+
+                setTimeout(() => {
+                    date.classList.add('animate-fade-delay-1');
+
+                    setTimeout(() => {
+                        location.classList.add('animate-fade-delay-2');
+
+                        setTimeout(() => {
+                            mapLink.classList.add('animate-fade-delay-3');
+
+                            setTimeout(() => {
+                                timer.classList.add('animate-fade-delay-4');
+
+                                // نمایش افکت‌های ویژه پس از نمایش همه متن‌ها
+                                setTimeout(() => {
+                                    createElegantEffects();
+                                }, 1000);
+                            }, 500);
+                        }, 500);
+                    }, 500);
+                }, 500);
+            }, 300);
+        }, 2000);
+
+        // حرکت تصویر به صورت آرام با حرکت موس
+        const transformContainer = document.getElementById('transformContainer');
+        document.addEventListener('mousemove', function(e) {
+            const moveX = (e.clientX - window.innerWidth / 2) / 50;
+            const moveY = (e.clientY - window.innerHeight / 2) / 50;
+
+            anime({
+                targets: transformContainer,
+                rotateX: moveY * -1,
+                rotateY: moveX,
+                duration: 1500,
+                easing: 'easeOutQuad'
+            });
+        });
+    });
+</script>
 </body>
 </html>
