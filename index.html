@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moslem & Sepide Wedding Invitation</title>
+    <meta name="description" content="کارت دعوت عروسی مسلم و سپیده">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
@@ -23,12 +24,13 @@
         .container {
             position: relative;
             height: 100vh;
-            width: 100%;
+            width: 800px;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: black;
             overflow: hidden;
+            margin: auto;
         }
 
         .invitation-img {
@@ -54,28 +56,28 @@
 
         .names {
             font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: bold;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 29px rgb(87 116 144 / 80%);
             opacity: 0;
             transform: translateY(20px);
         }
 
         .date {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-family: 'Vazirmatn', serif;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 29px rgb(87 116 144 / 80%);
             opacity: 0;
             transform: translateY(20px);
         }
 
         .location {
             font-family: 'Vazirmatn', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 29px rgb(87 116 144 / 80%);
             opacity: 0;
             transform: translateY(20px);
         }
@@ -102,7 +104,7 @@
         }
 
         .timer {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Vazirmatn', serif;
             font-size: 1.3rem;
             margin-top: 1.5rem;
             color: white;
@@ -185,10 +187,125 @@
             perspective: 1000px;
             overflow: hidden;
         }
+
+        /* دکمه پخش موزیک */
+        .play-music-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .play-music-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* انیمیشن ضربان برای دکمه */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        /* آیکون پخش موزیک */
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 20px 0 20px 30px;
+            border-color: transparent transparent transparent white;
+            margin-left: 8px;
+        }
+
+        /* وقتی دکمه پخش کلیک شد */
+        .music-started .play-music-button {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(1.5);
+            transition: all 0.5s ease;
+        }
+
+        /* دکمه صدا در گوشه صفحه */
+        .sound-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.5s ease 3s;
+        }
+
+        .music-started .sound-toggle {
+            opacity: 1;
+        }
+
+        /* آیکون های صدا */
+        .sound-on, .sound-off {
+            width: 24px;
+            height: 24px;
+        }
+
+        .sound-off {
+            display: none;
+        }
+
+        /* متن راهنما */
+        .start-prompt {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            z-index: 10;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            animation: fadeInOut 2s infinite;
+            width: 80%;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .music-started .start-prompt {
+            display: none;
+        }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container" id="container">
     <div class="transform-container" id="transformContainer">
         <!-- استفاده از تصویر واقعی که شما ارسال کردید -->
         <img id="weddingImage" class="invitation-img" src="./us.JPG" alt="Moslem & Sepide Wedding">
@@ -196,107 +313,221 @@
 
     <div class="glow-overlay" id="glowOverlay"></div>
 
+    <!-- دکمه پخش موزیک -->
+    <div class="play-music-button" id="playMusicButton">
+        <div class="play-icon"></div>
+    </div>
+
+    <!-- متن راهنمایی -->
+    <div class="start-prompt" id="startPrompt">برای نمایش دعوتنامه، روی دکمه زیر کلیک کنید</div>
+
+    <!-- دکمه صدا -->
+    <div class="sound-toggle" id="soundToggle">
+        <svg class="sound-on" viewBox="0 0 24 24" fill="white">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+        <svg class="sound-off" viewBox="0 0 24 24" fill="white">
+            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+    </div>
+
     <div id="textOverlay" class="text-overlay">
         <div id="names" class="names">Moslem & Sepide</div>
         <div id="date" class="date">15 فروردین 1404</div>
-        <div id="location" class="location">همدان، تالار روشان، ساعت 18</div>
+        <div id="location" class="location">همدان، تالار روشا، ساعت 18</div>
         <a id="mapLink" class="map-link" href="https://maps.app.goo.gl/tsrXDiFR3zjww7w88" target="_blank">
             مشاهده نقشه
         </a>
         <div id="timer" class="timer"></div>
     </div>
 
-    <audio id="bgMusic" loop autoplay>
+    <!-- ایجاد تگ audio -->
+    <audio id="bgMusic" loop preload="auto">
         <source src="./1.mp3" type="audio/mpeg">
     </audio>
 </div>
 
 <script>
-    // بارگیری و شروع صدا به صورت خودکار
-    function initializeAudioAutoplay() {
+    // منتظر بارگیری کامل صفحه می‌مانیم
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('container');
+        const image = document.getElementById('weddingImage');
+        const playMusicButton = document.getElementById('playMusicButton');
+        const soundToggle = document.getElementById('soundToggle');
         const audio = document.getElementById('bgMusic');
+        const names = document.getElementById('names');
+        const date = document.getElementById('date');
+        const location = document.getElementById('location');
+        const mapLink = document.getElementById('mapLink');
+        const timer = document.getElementById('timer');
 
-        // روش‌های مختلف برای پخش خودکار صدا
-        function attemptPlay() {
-            audio.play().then(() => {
-                console.log("Audio playing automatically");
-            }).catch(e => {
-                console.log("Auto-play prevented", e);
+        // فعال کردن بارگیری پیش‌فرض فایل صوتی
+        audio.load();
 
-                // اگر پخش خودکار مسدود شد، یک بار دیگر تلاش می‌کنیم
-                document.addEventListener('click', function() {
-                    audio.play();
-                }, {once: true});
+        // نمایش ابتدایی تصویر با فید
+        image.style.opacity = "0.6";
+
+        // وقتی دکمه پخش موزیک کلیک شد
+        playMusicButton.addEventListener('click', function() {
+            // پخش موسیقی
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log("موزیک با موفقیت پخش شد");
+
+                    // اضافه کردن کلاس برای شروع انیمیشن‌ها
+                    container.classList.add('music-started');
+
+                    // شروع فرآیند نمایش دعوتنامه
+                    startInvitationReveal();
+
+                }).catch(error => {
+                    console.error("خطا در پخش موزیک:", error);
+                    // حتی اگر با خطا مواجه شدیم، انیمیشن‌ها را شروع کنیم
+                    container.classList.add('music-started');
+                    startInvitationReveal();
+                });
+            }
+        });
+
+        // کنترل دکمه صدا
+        soundToggle.addEventListener('click', function() {
+            if (audio.muted) {
+                audio.muted = false;
+                document.querySelector('.sound-on').style.display = 'block';
+                document.querySelector('.sound-off').style.display = 'none';
+            } else {
+                audio.muted = true;
+                document.querySelector('.sound-on').style.display = 'none';
+                document.querySelector('.sound-off').style.display = 'block';
+            }
+        });
+
+        // شروع فرآیند نمایش دعوتنامه
+        function startInvitationReveal() {
+            // انیمیشن تصویر
+            animateImage();
+
+            // تنظیم تایمر شمارش معکوس
+            const weddingDate = new Date("2025-04-04T18:00:00");
+            $('#timer').countdown(weddingDate, function(event) {
+                $(this).html(event.strftime('تا روز عروسی: %D روز، %H ساعت، %M دقیقه، %S ثانیه'));
             });
+
+            // شروع روند نمایش عناصر متنی
+            setTimeout(() => {
+                // بلر کردن تصویر
+                image.style.filter = 'blur(3px) brightness(0.8)';
+
+                // نمایش متن‌ها با انیمیشن‌های متفاوت
+                setTimeout(() => {
+                    names.classList.add('animate-fade');
+
+                    setTimeout(() => {
+                        date.classList.add('animate-fade-delay-1');
+
+                        setTimeout(() => {
+                            location.classList.add('animate-fade-delay-2');
+
+                            setTimeout(() => {
+                                mapLink.classList.add('animate-fade-delay-3');
+
+                                setTimeout(() => {
+                                    timer.classList.add('animate-fade-delay-4');
+
+                                    // نمایش افکت‌های ویژه پس از نمایش همه متن‌ها
+                                    setTimeout(() => {
+                                        createElegantEffects();
+                                    }, 1000);
+                                }, 500);
+                            }, 500);
+                        }, 500);
+                    }, 500);
+                }, 300);
+            }, 1000);
         }
 
-        // مقداردهی اولیه و تلاش برای پخش
-        audio.volume = 0.7;
-        attemptPlay();
+        // انیمیشن ظاهر شدن تصویر با anime.js
+        function animateImage() {
+            const transformContainer = document.getElementById('transformContainer');
+            const glowOverlay = document.getElementById('glowOverlay');
 
-        // بررسی وضعیت پخش
-        audio.addEventListener('ended', function() {
-            audio.currentTime = 0;
-            audio.play();
-        });
+            // نمایش تصویر با افکت ویژه
+            anime({
+                targets: image,
+                opacity: [0.6, 1],
+                scale: [1.3, 1],
+                duration: 2000,
+                easing: 'easeOutQuad'
+            });
 
-        // تلاش مجدد با تعامل کاربر (برای iOS)
-        window.addEventListener('touchstart', function() {
-            attemptPlay();
-        }, {once: true});
-    }
+            // افکت 3D برای ظرف تصویر
+            anime({
+                targets: transformContainer,
+                rotateX: [5, 0],
+                rotateY: [5, 0],
+                duration: 2000,
+                easing: 'easeOutQuad'
+            });
 
-    // انیمیشن ظاهر شدن تصویر با anime.js
-    function animateImage() {
-        const image = document.getElementById('weddingImage');
-        const transformContainer = document.getElementById('transformContainer');
-        const glowOverlay = document.getElementById('glowOverlay');
-
-        // نمایش تصویر با افکت ویژه
-        anime({
-            targets: image,
-            opacity: [0, 1],
-            scale: [1.3, 1],
-            duration: 2000,
-            easing: 'easeOutQuad'
-        });
-
-        // افکت 3D برای ظرف تصویر
-        anime({
-            targets: transformContainer,
-            rotateX: [5, 0],
-            rotateY: [5, 0],
-            duration: 2000,
-            easing: 'easeOutQuad'
-        });
-
-        // افکت درخشش
-        setTimeout(() => {
-            glowOverlay.style.opacity = '1';
+            // افکت درخشش
             setTimeout(() => {
-                glowOverlay.style.opacity = '0';
-            }, 1500);
-        }, 500);
-    }
+                glowOverlay.style.opacity = '1';
+                setTimeout(() => {
+                    glowOverlay.style.opacity = '0';
+                }, 1500);
+            }, 500);
+        }
 
-    // ایجاد ذرات گلبرگ و افکت‌های ویژه
-    function createElegantEffects() {
-        const container = document.querySelector('.container');
-        const petalColors = ['#f8dde3', '#ffffff', '#ffe6f0'];
+        // ایجاد ذرات گلبرگ و افکت‌های ویژه
+        function createElegantEffects() {
+            const container = document.querySelector('.container');
+            const petalColors = ['#f8dde3', '#ffffff', '#ffe6f0'];
 
-        // ایجاد گلبرگ‌های متحرک
-        function createPetals() {
-            for (let i = 0; i < 20; i++) {
+            // ایجاد گلبرگ‌های متحرک
+            function createPetals() {
+                for (let i = 0; i < 20; i++) {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.style.width = `${10 + Math.random() * 20}px`;
+                    petal.style.height = `${10 + Math.random() * 20}px`;
+                    petal.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="${petalColors[Math.floor(Math.random() * petalColors.length)]}" d="M12,1C8.1,1,5,4.1,5,8c0,4,7,15,7,15s7-11,7-15C19,4.1,15.9,1,12,1z"/></svg>')`;
+
+                    // اضافه کردن به DOM
+                    container.appendChild(petal);
+
+                    // انیمیشن با anime.js
+                    anime({
+                        targets: petal,
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        opacity: [0, 0.8, 0],
+                        rotate: anime.random(-360, 360),
+                        scale: [0, 1, 0],
+                        duration: anime.random(3000, 8000),
+                        delay: anime.random(0, 5000),
+                        easing: 'easeOutQuad',
+                        complete: function(anim) {
+                            petal.remove();
+                            if (document.querySelector('.container')) {
+                                createPetal();
+                            }
+                        }
+                    });
+                }
+            }
+
+            // ایجاد یک گلبرگ جدید به صورت مداوم
+            function createPetal() {
                 const petal = document.createElement('div');
                 petal.className = 'petal';
                 petal.style.width = `${10 + Math.random() * 20}px`;
                 petal.style.height = `${10 + Math.random() * 20}px`;
                 petal.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="${petalColors[Math.floor(Math.random() * petalColors.length)]}" d="M12,1C8.1,1,5,4.1,5,8c0,4,7,15,7,15s7-11,7-15C19,4.1,15.9,1,12,1z"/></svg>')`;
 
-                // اضافه کردن به DOM
                 container.appendChild(petal);
 
-                // انیمیشن با anime.js
                 anime({
                     targets: petal,
                     left: `${Math.random() * 100}%`,
@@ -305,7 +536,6 @@
                     rotate: anime.random(-360, 360),
                     scale: [0, 1, 0],
                     duration: anime.random(3000, 8000),
-                    delay: anime.random(0, 5000),
                     easing: 'easeOutQuad',
                     complete: function(anim) {
                         petal.remove();
@@ -315,39 +545,36 @@
                     }
                 });
             }
-        }
 
-        // ایجاد یک گلبرگ جدید به صورت مداوم
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            petal.style.width = `${10 + Math.random() * 20}px`;
-            petal.style.height = `${10 + Math.random() * 20}px`;
-            petal.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="${petalColors[Math.floor(Math.random() * petalColors.length)]}" d="M12,1C8.1,1,5,4.1,5,8c0,4,7,15,7,15s7-11,7-15C19,4.1,15.9,1,12,1z"/></svg>')`;
+            // ایجاد افکت ذرات درخشان
+            function createElegantParticles() {
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'elegant-particle';
 
-            container.appendChild(petal);
+                    container.appendChild(particle);
 
-            anime({
-                targets: petal,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                opacity: [0, 0.8, 0],
-                rotate: anime.random(-360, 360),
-                scale: [0, 1, 0],
-                duration: anime.random(3000, 8000),
-                easing: 'easeOutQuad',
-                complete: function(anim) {
-                    petal.remove();
-                    if (document.querySelector('.container')) {
-                        createPetal();
-                    }
+                    anime({
+                        targets: particle,
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        opacity: [0, 0.8, 0],
+                        scale: [0, anime.random(1, 3), 0],
+                        duration: anime.random(2000, 6000),
+                        delay: anime.random(0, 3000),
+                        easing: 'easeOutQuad',
+                        complete: function(anim) {
+                            particle.remove();
+                            if (document.querySelector('.container')) {
+                                createParticle();
+                            }
+                        }
+                    });
                 }
-            });
-        }
+            }
 
-        // ایجاد افکت ذرات درخشان
-        function createElegantParticles() {
-            for (let i = 0; i < 30; i++) {
+            // ایجاد یک ذره جدید به صورت مداوم
+            function createParticle() {
                 const particle = document.createElement('div');
                 particle.className = 'elegant-particle';
 
@@ -360,7 +587,6 @@
                     opacity: [0, 0.8, 0],
                     scale: [0, anime.random(1, 3), 0],
                     duration: anime.random(2000, 6000),
-                    delay: anime.random(0, 3000),
                     easing: 'easeOutQuad',
                     complete: function(anim) {
                         particle.remove();
@@ -370,88 +596,11 @@
                     }
                 });
             }
+
+            // شروع افکت‌ها
+            createPetals();
+            createElegantParticles();
         }
-
-        // ایجاد یک ذره جدید به صورت مداوم
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'elegant-particle';
-
-            container.appendChild(particle);
-
-            anime({
-                targets: particle,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                opacity: [0, 0.8, 0],
-                scale: [0, anime.random(1, 3), 0],
-                duration: anime.random(2000, 6000),
-                easing: 'easeOutQuad',
-                complete: function(anim) {
-                    particle.remove();
-                    if (document.querySelector('.container')) {
-                        createParticle();
-                    }
-                }
-            });
-        }
-
-        // شروع افکت‌ها
-        createPetals();
-        createElegantParticles();
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const image = document.getElementById('weddingImage');
-        const names = document.getElementById('names');
-        const date = document.getElementById('date');
-        const location = document.getElementById('location');
-        const mapLink = document.getElementById('mapLink');
-        const timer = document.getElementById('timer');
-
-        // راه‌اندازی پخش خودکار صدا
-        initializeAudioAutoplay();
-
-        // انیمیشن تصویر
-        animateImage();
-
-        // تنظیم تایمر شمارش معکوس
-        const weddingDate = new Date("2025-04-04T18:00:00");
-        $('#timer').countdown(weddingDate, function(event) {
-            $(this).html(event.strftime('تا روز عروسی: %D روز، %H ساعت، %M دقیقه، %S ثانیه'));
-        });
-
-        // شروع روند نمایش عناصر متنی
-        setTimeout(() => {
-            // بلر کردن تصویر
-            image.style.filter = 'blur(3px) brightness(0.8)';
-
-            // نمایش متن‌ها با انیمیشن‌های متفاوت
-            setTimeout(() => {
-                names.classList.add('animate-fade');
-
-                setTimeout(() => {
-                    date.classList.add('animate-fade-delay-1');
-
-                    setTimeout(() => {
-                        location.classList.add('animate-fade-delay-2');
-
-                        setTimeout(() => {
-                            mapLink.classList.add('animate-fade-delay-3');
-
-                            setTimeout(() => {
-                                timer.classList.add('animate-fade-delay-4');
-
-                                // نمایش افکت‌های ویژه پس از نمایش همه متن‌ها
-                                setTimeout(() => {
-                                    createElegantEffects();
-                                }, 1000);
-                            }, 500);
-                        }, 500);
-                    }, 500);
-                }, 500);
-            }, 300);
-        }, 2000);
 
         // حرکت تصویر به صورت آرام با حرکت موس
         const transformContainer = document.getElementById('transformContainer');
